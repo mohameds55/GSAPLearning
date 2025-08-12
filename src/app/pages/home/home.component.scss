@@ -1,0 +1,26 @@
+$hot-pink: oklch(59.91% 0.239 8.14);
+$hot-red: oklch(61.42% 0.238 15.34);
+$vivid-pink: oklch(69.02% 0.277 332.77);
+.animation {
+  position: fixed;
+  inset: 0;
+  section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // height: 100vh;
+    overflow: hidden;
+    position: absolute;
+    inset: 0;
+    .wrapper {
+      width: 100% !important;
+      height: 100% !important;
+    }
+    svg {
+      overflow: visible !important;
+    }
+  }
+}
+.animation-scroll-spacer {
+  height: 5000px;
+}

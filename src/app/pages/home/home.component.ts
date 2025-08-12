@@ -75,9 +75,9 @@ export class HomeComponent implements AfterViewInit {
         0.1
       )
       .to(this.shield.nativeElement, {
-        scale: 30,
+        scale: 21,
         duration: 1,
-        rotate: -50,
+        rotate: -45,
         opacity: 0,
       })
       .to(
@@ -86,7 +86,7 @@ export class HomeComponent implements AfterViewInit {
           opacity: 0,
           duration: 0.3,
         },
-        2.3
+        2
       );
 
     /* Second Timeline */

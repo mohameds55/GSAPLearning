@@ -4,10 +4,12 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AnimationDirectiveDirective } from './shared/directives/animation-directive.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AnimationDirectiveDirective
   ],
   imports: [
     BrowserModule,

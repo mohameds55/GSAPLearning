@@ -72,7 +72,7 @@ export class AnimationDirectiveDirective {
           trigger: this.animation.nativeElement,
           start: 'center center',
           end: '+=4300', // Extended for both timelines
-          scrub: 1,
+          scrub: 2.5,
           markers: true,
           pin: true,
           pinSpacing: false,
@@ -360,7 +360,4 @@ export class AnimationDirectiveDirective {
       masterTL.add(tl1, 0); // First timeline starts immediately
     }
   }
-}
-function to() {
-  throw new Error('Function not implemented.');
 }

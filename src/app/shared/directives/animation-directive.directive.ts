@@ -1,3 +1,4 @@
+import { keyframes } from '@angular/animations';
 import { isPlatformBrowser } from '@angular/common';
 import {
   Directive,
@@ -10,12 +11,12 @@ import {
 } from '@angular/core';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
-import { pipeline } from 'node:stream';
 
 @Directive({
   selector: '[appAnimationDirective]',
 })
 export class AnimationDirectiveDirective {
+  @ViewChild('animation') animation!: ElementRef<HTMLElement>;
   @ViewChild('wrapper') wrapper!: ElementRef<HTMLElement>;
   @ViewChild('logo') logo!: ElementRef<HTMLElement>;
   @ViewChild('shield') shield!: ElementRef<HTMLElement>;
@@ -24,6 +25,9 @@ export class AnimationDirectiveDirective {
   @ViewChild('scalabilityWrapper') scalabilityWrapper!: ElementRef<HTMLElement>;
   @ViewChild('starWrapper') starsWrapper!: ElementRef<HTMLElement>;
   @ViewChild('lovedWrapper') lovedWrapper!: ElementRef<HTMLElement>;
+  @ViewChild('buildForEveryoneWrapper')
+  buildForEveryoneWrapper!: ElementRef<HTMLElement>;
+  @ViewChild('buildForEveryone') buildForEveryone!: ElementRef<HTMLElement>;
   @ViewChildren('star') stars!: QueryList<ElementRef>;
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     gsap.registerPlugin(ScrollTrigger);
@@ -53,6 +57,7 @@ export class AnimationDirectiveDirective {
         [
           this.scalabilityWrapper.nativeElement,
           this.lovedWrapper.nativeElement,
+          this.buildForEveryoneWrapper.nativeElement,
         ],
         {
           opacity: 0,
@@ -64,12 +69,13 @@ export class AnimationDirectiveDirective {
       /* Master Timeline with ScrollTrigger */
       const masterTL = gsap.timeline({
         scrollTrigger: {
-          trigger: this.wrapper.nativeElement,
+          trigger: this.animation.nativeElement,
           start: 'center center',
-          end: '+=4500', // Extended for both timelines
+          end: '+=4300', // Extended for both timelines
           scrub: 1,
-          markers: false,
+          markers: true,
           pin: true,
+          pinSpacing: false,
         },
       });
 
@@ -91,7 +97,7 @@ export class AnimationDirectiveDirective {
           0.2
         )
         .to(this.shield.nativeElement, {
-          scale: 21,
+          scale: 25,
           duration: 2,
           rotate: -70,
           opacity: 0,
@@ -211,7 +217,7 @@ export class AnimationDirectiveDirective {
           this.lovedWrapper.nativeElement,
           {
             opacity: 2.5,
-            scale: 2,
+            scale: 1,
             duration: 1,
             ease: 'power2.out',
           },
@@ -273,6 +279,51 @@ export class AnimationDirectiveDirective {
             y: 40,
             ease: 'power2.out',
           }
+        )
+        .to(
+          this.stars.map((star) => star.nativeElement),
+          {
+            keyframes: [
+              {
+                x: 10,
+                y: 10,
+                duration: 1,
+                ease: 'power2.out',
+              },
+              {
+                opacity: 0,
+                duration: 1,
+                delay: -0.9,
+                x: -20,
+                y: -20,
+                ease: 'power2.out',
+              },
+            ],
+          }
+        )
+        .to(
+          this.lovedWrapper.nativeElement,
+          {
+            opacity: 0,
+            scale: 2,
+            duration: 1.5,
+            ease: 'power2.out',
+          },
+          '<+0.1'
+        )
+        .to(this.buildForEveryoneWrapper.nativeElement, {
+          opacity: 1,
+          scale: 1,
+          duration: 3,
+          ease: 'power2.out',
+        })
+        .to(
+          this.buildForEveryone.nativeElement,
+          {
+            backgroundPositionX: '30%',
+            duration: 3,
+          },
+          '<+0.5'
         );
 
       /* Second Timeline */
@@ -305,8 +356,11 @@ export class AnimationDirectiveDirective {
         }),
         startTime
       );
-
+      console.log(tl1.duration());
       masterTL.add(tl1, 0); // First timeline starts immediately
     }
   }
+}
+function to() {
+  throw new Error('Function not implemented.');
 }

@@ -73,7 +73,7 @@ export class AnimationDirectiveDirective {
           start: 'center center',
           end: '+=4300', // Extended for both timelines
           scrub: 2.5,
-          markers: true,
+          markers: false,
           pin: true,
           pinSpacing: false,
         },
@@ -115,7 +115,7 @@ export class AnimationDirectiveDirective {
           this.scalabilityWrapper.nativeElement,
           {
             opacity: 1,
-            scale: 2,
+            scale: 1,
             duration: 1,
             delay: 0.8,
           },
@@ -320,7 +320,7 @@ export class AnimationDirectiveDirective {
         .to(
           this.buildForEveryone.nativeElement,
           {
-            backgroundPositionX: '30%',
+            backgroundPositionX: '10%',
             duration: 3,
           },
           '<+0.5'

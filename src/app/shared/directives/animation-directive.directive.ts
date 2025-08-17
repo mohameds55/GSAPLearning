@@ -10,7 +10,7 @@ import {
   ViewChildren,
 } from '@angular/core';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/all';
+import { ScrollTrigger, DrawSVGPlugin } from 'gsap/all';
 
 @Directive({
   selector: '[appAnimationDirective]',
@@ -31,6 +31,7 @@ export class AnimationDirectiveDirective {
   @ViewChildren('star') stars!: QueryList<ElementRef>;
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(DrawSVGPlugin);
   }
 
   ngAfterViewInit() {
@@ -65,13 +66,12 @@ export class AnimationDirectiveDirective {
           transformOrigin: '50% 50%',
         }
       );
-
       /* Master Timeline with ScrollTrigger */
       const masterTL = gsap.timeline({
         scrollTrigger: {
           trigger: this.animation.nativeElement,
           start: 'center center',
-          end: '+=4300', // Extended for both timelines
+          end: '+=5400', // Extended for both timelines
           scrub: 2.5,
           markers: true,
           pin: true,
@@ -356,8 +356,11 @@ export class AnimationDirectiveDirective {
         }),
         startTime
       );
+      const tl2 = gsap.timeline();
+      // tl2;
       console.log(tl1.duration());
-      masterTL.add(tl1, 0); // First timeline starts immediately
+      masterTL.add(tl1, 0);
+      // masterTL.add(tl2, 0); // Second timeline starts immediately
     }
   }
 }

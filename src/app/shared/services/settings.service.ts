@@ -4,9 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class SettingsService {
-  loadSettings() {
-    // Logic to load settings
-    console.log('Settings loaded');
-  }
+  // loadSettings() {
+  //   // Logic to load settings
+  //   console.log('Settings loaded');
+  // }
   constructor() {}
 }

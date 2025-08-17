@@ -8,14 +8,11 @@ import { SettingsService } from '../../shared/services/settings.service';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent extends AnimationDirectiveDirective {
-  constructor(
-    @Inject(PLATFORM_ID) platformId: Object,
-    private settingService: SettingsService
-  ) {
+  constructor(@Inject(PLATFORM_ID) platformId: Object) {
     super(platformId);
   }
   override ngAfterViewInit(): void {
-    this.settingService.loadSettings();
     super.ngAfterViewInit();
+    // this.settingService.loadSettings();
   }
 }
